@@ -59,9 +59,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 .list{display:flex;flex-direction:column;gap:7px}
 .lrow{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:11px;background:linear-gradient(90deg,rgba(0,242,254,.07),rgba(99,102,241,.04));border:1px solid rgba(0,242,254,.16)}
 .lrow .n{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:900;color:#04121F;background:#64748B;flex:none}
-.lrow .nm{font-size:12.5px;font-weight:800;color:#EAF6FF;line-height:1.35}
-.lrow .mt{font-size:10px;color:#8FA6C0}
-.lrow .rt{margin-left:auto;font-size:12.5px;font-weight:900;white-space:nowrap}
+.lrow .mid{flex:1;min-width:0}
+.lrow .nm{font-size:12.5px;font-weight:800;color:#EAF6FF;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .mt{font-size:10px;color:#8FA6C0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .rt{margin-left:auto;font-size:12px;font-weight:900;white-space:nowrap;flex:none}
 .lrow.champ{background:linear-gradient(90deg,rgba(245,158,11,.18),rgba(217,119,6,.26));border:1.5px solid #F59E0B;box-shadow:0 0 18px rgba(245,158,11,.3)}
 .lrow.champ .nm{color:#FBBF24}
 .lrow.champ .n{background:transparent;font-size:14px}
@@ -305,8 +306,8 @@ function renderClass(){
     ]
   }));
   const lrow = (arr, fmt, color) => arr.map((x,i)=>`<div class="lrow${i===0?' champ':''}"><div class="n">${i===0?'👑':i+1}</div>
-    <div><div class="nm">${x.name}</div><div class="mt">${x.group}</div></div><div class="rt" style="color:${i===0?'#FBBF24':color}">${fmt(x)}</div></div>`).join('');
-  document.getElementById('clsStars').innerHTML = lrow(DATA.stars, x=>`${x.prev}→${x.exam} (${x.delta>=0?'+':''}${x.delta})`, '#00F2FE');
+    <div class="mid"><div class="nm">${x.name}</div><div class="mt">${x.group}</div></div><div class="rt" style="color:${i===0?'#FBBF24':color}">${fmt(x)}</div></div>`).join('');
+  document.getElementById('clsStars').innerHTML = lrow(DATA.stars, x=>`${x.prev}→${x.exam}(${x.delta>=0?'+':''}${x.delta})`, '#00F2FE');
   document.getElementById('clsRewards').innerHTML = lrow(DATA.topRewards, x=>x.value+' 分', '#FBBF24');
   document.getElementById('clsFull').innerHTML = DATA.fullmark.length ? DATA.fullmark.map(n=>`<span>${n}</span>`).join('') : '<span>本周暂无满分</span>';
 }
